@@ -1,0 +1,15 @@
+My own original solution of the 3 hyphen bug on Slackware 14.2
+
+It consists of only one line: Line 288
+
+$ diff -Naur removepkg /sbin/removepkg.orig 
+--- removepkg   2017-11-08 14:40:05.505922068 +0100
++++ /sbin/removepkg.orig        2016-06-15 00:10:58.000000000 +0200
+@@ -285,7 +285,6 @@
+   # be removed.  If you want to remove them all, you'll need to run
+   # removepkg again until it removes all the same-named packages.
+   if [ ! -e $ADM_DIR/packages/$PKGNAME ]; then
+-   PKGNAME=$(basename $ADM_DIR/packages/${PKGNAME}*)
+    SHORT="$(package_name $PKGNAME)"
+    for long_package in $ADM_DIR/packages/${PKGNAME}* ; do
+     if [ "$SHORT" = "$(package_name $long_package)" ]; then
